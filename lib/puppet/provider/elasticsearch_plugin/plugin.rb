@@ -50,9 +50,11 @@ Puppet::Type.type(:elasticsearch_plugin).provide(:plugin) do
   end
 
   def pluginfile
-    if @resource[:plugin_path]
+    if @resource[:plugin_path].empty?
+      puts("Got Path: ", File.join(@resource[:plugin_dir], @resource[:plugin_path], '.name'))
       File.join(@resource[:plugin_dir], @resource[:plugin_path], '.name')
     else
+      puts("Got Path: ", File.join(@resource[:plugin_dir], plugin_name(@resource[:name]), '.name'))
       File.join(@resource[:plugin_dir], plugin_name(@resource[:name]), '.name')
     end
   end
