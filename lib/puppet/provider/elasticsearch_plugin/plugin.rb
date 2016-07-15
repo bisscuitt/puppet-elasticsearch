@@ -25,9 +25,6 @@ Puppet::Type.type(:elasticsearch_plugin).provide(:plugin) do
 
   def exists?
     es_version
-    puts "Plugin file: #{pluginfile}"
-    puts "Module Path: #{@resource[:plugin_path]}"
-    puts "Module Name: #{plugin_name(@resource[:name])}"
     if !File.exists?(pluginfile)
       debug "Plugin file #{pluginfile} does not exist"
       return false
@@ -54,10 +51,8 @@ Puppet::Type.type(:elasticsearch_plugin).provide(:plugin) do
 
   def pluginfile
     if @resource[:plugin_path]
-      puts("Got Path: ", File.join(@resource[:plugin_dir], @resource[:plugin_path], '.name'))
       File.join(@resource[:plugin_dir], @resource[:plugin_path], '.name')
     else
-      puts("Got Path: ", File.join(@resource[:plugin_dir], plugin_name(@resource[:name]), '.name'))
       File.join(@resource[:plugin_dir], plugin_name(@resource[:name]), '.name')
     end
   end
