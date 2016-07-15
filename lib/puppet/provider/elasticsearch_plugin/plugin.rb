@@ -25,6 +25,9 @@ Puppet::Type.type(:elasticsearch_plugin).provide(:plugin) do
 
   def exists?
     es_version
+    puts "Plugin file: #{pluginfile}"
+    puts "Module Path: #{@resource[:plugin_path]}"
+    puts "Module Name: #{plugin_name(@resource[:name])}"
     if !File.exists?(pluginfile)
       debug "Plugin file #{pluginfile} does not exist"
       return false
